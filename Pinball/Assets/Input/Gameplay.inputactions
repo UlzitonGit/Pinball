@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "Gameplay",
+    "maps": [
+        {
+            "name": "gates",
+            "id": "2350a59e-ec27-4434-bcdb-7597a484e1c2",
+            "actions": [
+                {
+                    "name": "StretchingZ",
+                    "type": "Value",
+                    "id": "5cae4b11-519e-474e-8ee2-faf8b9f2df10",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "StretchingX",
+                    "type": "Value",
+                    "id": "252294f3-6ca6-415a-a14d-b3cd19589922",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1ee799ab-dad0-43d1-8c04-3b3d07e324ef",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StretchingZ",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86d030be-fbd5-43db-91c7-b9560aa3ed40",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StretchingX",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
