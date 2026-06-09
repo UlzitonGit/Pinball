@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ball
   - Punching
+  - Obstacles
   layers:
   - Default
   - TransparentFX

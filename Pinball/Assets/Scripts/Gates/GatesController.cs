@@ -4,15 +4,14 @@ using Zenject;
     
 public class GatesController: MonoBehaviour
 {
-    [SerializeField] float hitStrength = 80000f;
-    [SerializeField] float dampening = 250f;
+    [SerializeField] private GatesDataSO gatesData;
     [SerializeField] HingeJoint hingeJointLeft;
     [SerializeField] HingeJoint hingeJointRight;
+    [SerializeField] HingeJoint hingeJointSpawner;
     private JointSpring jointSpringReleased = new();
     private JointSpring jointSpringPressed = new();
-    private bool leftFlipperPressed, rightFlipperPressed;
+    private bool leftFlipperPressed, rightFlipperPressed, spawnerFlipperPressed;
     private GatesInputHandler inputHandler;
-    private float flipperInput;
     private JointSpring spring;
 
     [Inject]
@@ -21,8 +20,8 @@ public class GatesController: MonoBehaviour
         this.inputHandler = _inputHandler;
         inputHandler.Enable();
         
-        jointSpringPressed.spring = jointSpringReleased.spring = hitStrength;
-        jointSpringPressed.damper = jointSpringReleased.damper = dampening;
+        jointSpringPressed.spring = jointSpringReleased.spring = gatesData.hitStrength;
+        jointSpringPressed.damper = jointSpringReleased.damper = gatesData.dampening;
         jointSpringPressed.targetPosition = hingeJointLeft.limits.max;
         jointSpringReleased.targetPosition = hingeJointLeft.limits.min;
     }
@@ -50,9 +49,17 @@ public class GatesController: MonoBehaviour
         {
             hingeJointRight.spring = jointSpringReleased;
         }
-
+        if (spawnerFlipperPressed)
+        {
+            hingeJointSpawner.spring = jointSpringPressed;
+        }
+        else
+        {
+            hingeJointSpawner.spring = jointSpringReleased;
+        }
         leftFlipperPressed = inputHandler.inputX > 0;
         rightFlipperPressed = inputHandler.inputZ > 0;
+        spawnerFlipperPressed = inputHandler.inputSpace > 0;
     }
     
 }

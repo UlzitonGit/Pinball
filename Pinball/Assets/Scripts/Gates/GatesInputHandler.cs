@@ -7,6 +7,8 @@ public class GatesInputHandler
     private Gameplay gameplay;
     public float inputZ { get; private set; }
     public float inputX { get; private set; }
+    
+    public float inputSpace { get; private set; }
     public void Enable()
     {
         gameplay = new Gameplay();
@@ -17,6 +19,11 @@ public class GatesInputHandler
         gameplay.gates.StretchingX.Enable();
         gameplay.gates.StretchingX.performed += OnPressedX;
         gameplay.gates.StretchingX.canceled += OnCanceledX;
+        
+        gameplay.gates.StretchingSpace.Enable();
+        gameplay.gates.StretchingSpace.performed += OnPressedSpace;
+        gameplay.gates.StretchingSpace.canceled += OnPressedSpace;
+
     }
     
    
@@ -29,12 +36,17 @@ public class GatesInputHandler
         gameplay.gates.StretchingX.performed -= OnPressedX;
         gameplay.gates.StretchingX.canceled -= OnCanceledX;
         gameplay.gates.StretchingX.Disable();
+        
+        gameplay.gates.StretchingSpace.performed -= OnPressedSpace;
+        gameplay.gates.StretchingSpace.canceled -= OnPressedSpace;
+        gameplay.gates.StretchingSpace.Disable();
     }
     
     private void OnPressedZ(InputAction.CallbackContext context)
     {
         inputZ = context.ReadValue<float>();
     }
+    
     private void OnPressedX(InputAction.CallbackContext context)
     {
         inputX = context.ReadValue<float>();
@@ -46,5 +58,13 @@ public class GatesInputHandler
     private void OnCanceledX(InputAction.CallbackContext context)
     {
         inputX = 0;
+    }
+    private void OnPressedSpace(InputAction.CallbackContext context)
+    {
+        inputSpace = context.ReadValue<float>();
+    }
+    private void OnCanceledSpace(InputAction.CallbackContext context)
+    {
+        inputSpace = 0;
     }
 }

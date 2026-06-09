@@ -109,6 +109,15 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""StretchingSpace"",
+                    ""type"": ""Value"",
+                    ""id"": ""94872567-cbf9-47df-adea-6d7d6b71ab2f"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -133,6 +142,17 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
                     ""action"": ""StretchingX"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a962415-3115-4688-8013-57460b4bc4e0"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StretchingSpace"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +163,7 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
         m_gates = asset.FindActionMap("gates", throwIfNotFound: true);
         m_gates_StretchingZ = m_gates.FindAction("StretchingZ", throwIfNotFound: true);
         m_gates_StretchingX = m_gates.FindAction("StretchingX", throwIfNotFound: true);
+        m_gates_StretchingSpace = m_gates.FindAction("StretchingSpace", throwIfNotFound: true);
     }
 
     ~@Gameplay()
@@ -225,6 +246,7 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
     private List<IGatesActions> m_GatesActionsCallbackInterfaces = new List<IGatesActions>();
     private readonly InputAction m_gates_StretchingZ;
     private readonly InputAction m_gates_StretchingX;
+    private readonly InputAction m_gates_StretchingSpace;
     /// <summary>
     /// Provides access to input actions defined in input action map "gates".
     /// </summary>
@@ -244,6 +266,10 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "gates/StretchingX".
         /// </summary>
         public InputAction @StretchingX => m_Wrapper.m_gates_StretchingX;
+        /// <summary>
+        /// Provides access to the underlying input action "gates/StretchingSpace".
+        /// </summary>
+        public InputAction @StretchingSpace => m_Wrapper.m_gates_StretchingSpace;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -276,6 +302,9 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
             @StretchingX.started += instance.OnStretchingX;
             @StretchingX.performed += instance.OnStretchingX;
             @StretchingX.canceled += instance.OnStretchingX;
+            @StretchingSpace.started += instance.OnStretchingSpace;
+            @StretchingSpace.performed += instance.OnStretchingSpace;
+            @StretchingSpace.canceled += instance.OnStretchingSpace;
         }
 
         /// <summary>
@@ -293,6 +322,9 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
             @StretchingX.started -= instance.OnStretchingX;
             @StretchingX.performed -= instance.OnStretchingX;
             @StretchingX.canceled -= instance.OnStretchingX;
+            @StretchingSpace.started -= instance.OnStretchingSpace;
+            @StretchingSpace.performed -= instance.OnStretchingSpace;
+            @StretchingSpace.canceled -= instance.OnStretchingSpace;
         }
 
         /// <summary>
@@ -347,5 +379,12 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnStretchingX(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "StretchingSpace" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnStretchingSpace(InputAction.CallbackContext context);
     }
 }
