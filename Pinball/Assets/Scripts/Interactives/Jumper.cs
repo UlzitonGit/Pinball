@@ -6,7 +6,7 @@ public class Jumper : MonoBehaviour, IPunching
 {
     [SerializeField] private JumperSO data;
     private ScoreStorage scoreStorage;
-    private bool canEarnScore;
+    private bool canEarnScore = true;
     [Inject]
     private void Construct(ScoreStorage _scoreStorage)
     {
@@ -17,9 +17,8 @@ public class Jumper : MonoBehaviour, IPunching
         if(canEarnScore)
             scoreStorage.AddScore(data.Scores);
         Vector3 direction = (rigidbody.transform.position - transform.position).normalized;
-        direction += Random.insideUnitSphere;
-        direction.y = Mathf.Abs(direction.y);
         rigidbody.AddForce(direction * data.jumperForce, ForceMode.Impulse);
+        Debug.Log(data.jumperForce);
     }
 
     IEnumerable Reloading()

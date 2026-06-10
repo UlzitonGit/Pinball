@@ -5,6 +5,8 @@ public class BallBounce : MonoBehaviour
 {
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private ParticleSystem particleSystem;
+
+    private bool active = true;
     private void OnCollisionEnter(Collision other)
     {
         if (other.collider.CompareTag("Obstacles"))
@@ -16,6 +18,12 @@ public class BallBounce : MonoBehaviour
             other.gameObject.GetComponent<IPunching>().Punch(rigidbody);
             particleSystem.Play();
         }
+    }
+
+    public void SetActive(bool active)
+    {
+        this.active = active;
+        rigidbody.isKinematic = active;
     }
     
 }

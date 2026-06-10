@@ -118,6 +118,15 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""531a59d3-d3ad-4b36-99d8-b8ab0ce29c76"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -153,6 +162,17 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
                     ""action"": ""StretchingSpace"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4341b86-b834-49c6-8e72-71176219e71d"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
         m_gates_StretchingZ = m_gates.FindAction("StretchingZ", throwIfNotFound: true);
         m_gates_StretchingX = m_gates.FindAction("StretchingX", throwIfNotFound: true);
         m_gates_StretchingSpace = m_gates.FindAction("StretchingSpace", throwIfNotFound: true);
+        m_gates_Restart = m_gates.FindAction("Restart", throwIfNotFound: true);
     }
 
     ~@Gameplay()
@@ -247,6 +268,7 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
     private readonly InputAction m_gates_StretchingZ;
     private readonly InputAction m_gates_StretchingX;
     private readonly InputAction m_gates_StretchingSpace;
+    private readonly InputAction m_gates_Restart;
     /// <summary>
     /// Provides access to input actions defined in input action map "gates".
     /// </summary>
@@ -270,6 +292,10 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "gates/StretchingSpace".
         /// </summary>
         public InputAction @StretchingSpace => m_Wrapper.m_gates_StretchingSpace;
+        /// <summary>
+        /// Provides access to the underlying input action "gates/Restart".
+        /// </summary>
+        public InputAction @Restart => m_Wrapper.m_gates_Restart;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -305,6 +331,9 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
             @StretchingSpace.started += instance.OnStretchingSpace;
             @StretchingSpace.performed += instance.OnStretchingSpace;
             @StretchingSpace.canceled += instance.OnStretchingSpace;
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
         }
 
         /// <summary>
@@ -325,6 +354,9 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
             @StretchingSpace.started -= instance.OnStretchingSpace;
             @StretchingSpace.performed -= instance.OnStretchingSpace;
             @StretchingSpace.canceled -= instance.OnStretchingSpace;
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
         }
 
         /// <summary>
@@ -386,5 +418,12 @@ public partial class @Gameplay: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnStretchingSpace(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Restart" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRestart(InputAction.CallbackContext context);
     }
 }
