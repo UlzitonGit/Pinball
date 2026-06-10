@@ -1,0 +1,31 @@
+using System.Collections;
+using UnityEngine;
+using Zenject;
+
+public class Jumper : MonoBehaviour, IPunching
+{
+    [SerializeField] private JumperSO data;
+    private ScoreStorage scoreStorage;
+    private bool canEarnScore;
+    [Inject]
+    private void Construct(ScoreStorage _scoreStorage)
+    {
+        scoreStorage = _scoreStorage;
+    }
+    public void Punch(Rigidbody rigidbody)
+    {
+        if(canEarnScore)
+            scoreStorage.AddScore(data.Scores);
+        Vector3 direction = (rigidbody.transform.position - transform.position).normalized;
+        direction += Random.insideUnitSphere;
+        direction.y = Mathf.Abs(direction.y);
+        rigidbody.AddForce(direction * data.jumperForce, ForceMode.Impulse);
+    }
+
+    IEnumerable Reloading()
+    {
+        canEarnScore = false;
+        yield return new WaitForSeconds(data.Scores);
+        canEarnScore = true;
+    }
+}
